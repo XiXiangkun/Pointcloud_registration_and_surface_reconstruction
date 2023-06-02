@@ -724,6 +724,30 @@ int main(int argc, char** argv)
 		viewer->spin();
 		
 		source = bun[0].cloud;
+		
+		if (strcmp(argv[1], "-s") == 0) {
+			//
+			//平滑处理
+			smoothingHandle(source);
+		}
+		else if (strcmp(argv[1], "-q1") == 0) {
+			//
+			//移动立方体算法
+			restructMethod_3(source);
+		}
+		else if (strcmp(argv[1], "-q2") == 0) {
+			//
+			//泊松曲面重建
+			poiRestruct(source);
+		}
+		else if (strcmp(argv[1], "-q3") == 0) {
+			//
+			//贪婪投影三角化
+			restructMethod_2(source);
+		}
+		else {
+			cout << "参数输入有误！" << endl;
+		}
 	}
 	else if (argc == 4) {
 		str_1 = argv[2];
@@ -751,9 +775,7 @@ int main(int argc, char** argv)
 	
 		source = bun[0].cloud;
 		target = bun[1].cloud;
-	}
-	
-	if (argc == 4) {
+		
 		if (strcmp(argv[1], "-p1") == 0) {
 			//
 			//经典ICP算法
@@ -773,31 +795,6 @@ int main(int argc, char** argv)
 			//
 			//SIFT关键点+PFH特征描述
 			SIFT_PFH(source, target);
-		}
-		else {
-			cout << "参数输入有误！" << endl;
-		}
-	}
-	if (argc == 3) {
-		if (strcmp(argv[1], "-s") == 0) {
-			//
-			//平滑处理
-			smoothingHandle(source);
-		}
-		else if (strcmp(argv[1], "-q1") == 0) {
-			//
-			//移动立方体算法
-			restructMethod_3(source);
-		}
-		else if (strcmp(argv[1], "-q2") == 0) {
-			//
-			//泊松曲面重建
-			poiRestruct(source);
-		}
-		else if (strcmp(argv[1], "-q3") == 0) {
-			//
-			//贪婪投影三角化
-			restructMethod_2(source);
 		}
 		else {
 			cout << "参数输入有误！" << endl;
