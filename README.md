@@ -10,9 +10,9 @@
 
 ### 如果你真的需要
 项目大概的思路就是运行pcl库对点云数据进行的处理，点云配准+曲面重建的过程基本都是基于现有接口实现的，我个人应该没有进行大的内容修整。
-参考书目是《点云库pcl从入门到精通》
+参考书目是**《点云库pcl从入门到精通》**
 
-我曾经的笔记里有记录的一些要注意的点，大家可以参考：
+我曾经的笔记里有几个要注意的点，大家可以参考：
 * dll配置过但是文件丢失，可以去vs2015\PCL\PCL 1.8.1\bin目录中找到并复制到C:\Windows\System32
 * 点云格式使用的是PointXYZ
 
@@ -25,5 +25,5 @@ dy.exe基于ConsoleApplication1.exe完成软件功能
 
 ---
 ### Note：
-Sorry for nelgecting those issues for, like 3 years.
+Sorry for nelgecting those issues for like 3 years.
 This project is really awful and has no need for mainteinance.
