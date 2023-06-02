@@ -1,6 +1,8 @@
 ## Pointcloud_registration_and_surface_reconstruction
+### Note：
+* Sorry for neglecting those issues for like 3 years.
+* This project sucks and has no need for mainteinance.
 ### 基于VS2015，openCV2.4.13.6，PCL1.8.1实现的点云配准和曲面重建一些算法的实现效果示例
-
 ### 2023.06.02更新
 * 很抱歉，我最近才注意到这些issues。
 * 当时源代码文件中的一些文件超过了允许上传文件的最大限制，我觉得无所谓，所以只上传了部分代码文件和可执行文件。
@@ -24,6 +26,13 @@
 * dy.exe基于ConsoleApplication1.exe完成软件功能
 
 ---
-### Note：
-* Sorry for neglecting those issues for like 3 years.
-* This project sucks and has no need for mainteinance.
+### 早期效果展示
+![](https://github.com/XiXiangkun/images/blob/master/registration_1.jpg?raw=true)
+
+![](https://github.com/XiXiangkun/images/blob/master/registration_2.jpg?raw=true)
+
+![](https://github.com/XiXiangkun/images/blob/master/registration_3.jpg?raw=true)
+
+![](https://github.com/XiXiangkun/images/blob/master/reconstruction_1.jpg?raw=true)
+
+![](https://github.com/XiXiangkun/images/blob/master/reconstruction_2.jpg?raw=true)
