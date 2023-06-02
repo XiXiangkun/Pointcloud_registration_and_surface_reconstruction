@@ -25,5 +25,5 @@
 
 ---
 ### Note：
-* Sorry for nelgecting those issues for like 3 years.
+* Sorry for neglecting those issues for like 3 years.
 * This project sucks and has no need for mainteinance.
