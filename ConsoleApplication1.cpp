@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 //
-//»ù±¾PCL¿âÊ¹ÓÃ
+//åŸºæœ¬PCLåº“ä½¿ç”¨
 #include <pcl/point_types.h>
 #include <pcl/io/ply_io.h>
 #include <pcl/io/pcd_io.h>
@@ -11,7 +11,7 @@
 #include <pcl/visualization/cloud_viewer.h>
 #include <pcl/io/io.h>
 //
-//ÓÃÓÚÀàĞÍ¶¨ÒåPCD
+//ç”¨äºç±»å‹å®šä¹‰PCD
 #include <boost/make_shared.hpp>
 #include <pcl/point_cloud.h>
 #include <pcl/point_representation.h>
@@ -31,18 +31,18 @@
 #include <pcl/io/pcd_io.h>
 #include <pcl/io/vtk_lib_io.h>
 
-//ÓÃÓÚÇúÃæÖØ½¨
+//ç”¨äºæ›²é¢é‡å»º
 #include <pcl/surface/mls.h>
 #include <pcl/surface/poisson.h>
 #include <pcl/surface/gp3.h>
 #include <pcl/surface/marching_cubes_hoppe.h>
 
-//ÓÃÓÚ¹Ø¼üµãÌáÈ¡
+//ç”¨äºå…³é”®ç‚¹æå–
 #include <pcl/keypoints/sift_keypoint.h>
 
-//ÓÃÓÚÌØÕ÷ÃèÊöµÄPFH
+//ç”¨äºç‰¹å¾æè¿°çš„PFH
 #include <pcl/features/pfh.h>
-//²ÉÑùÒ»ÖÂĞÔ
+//é‡‡æ ·ä¸€è‡´æ€§
 #include <pcl/registration/ia_ransac.h>
 
 using namespace std;
@@ -50,7 +50,7 @@ using pcl::visualization::PointCloudColorHandlerGenericField;
 using pcl::visualization::PointCloudColorHandlerCustom;
 
 //
-//¼òµ¥ÀàĞÍ¶¨Òå
+//ç®€å•ç±»å‹å®šä¹‰
 typedef pcl::PointXYZ PointT;
 typedef pcl::PointCloud<PointT> PointCloud;
 typedef pcl::PointNormal PointNormalT;
@@ -74,7 +74,7 @@ namespace pcl
 }
 
 //
-//PCD½á¹¹Ìå¶¨Òå£¬´æ´¢µãÔÆÊı¾İºÍname
+//PCDç»“æ„ä½“å®šä¹‰ï¼Œå­˜å‚¨ç‚¹äº‘æ•°æ®å’Œname
 struct PCD {
 	PointCloud::Ptr cloud;
 	string f_name;
@@ -82,10 +82,8 @@ struct PCD {
 };
 
 //
-//PLY×ªPCD
+//PLYè½¬PCD
 void ply2pcd(const string str_1, const string str_2) {
-	//"C:/Users/Scott/Desktop/bunny.tar/bunny/data/top3.ply"
-	//"C:/Users/Scott/Desktop/bunny.tar/bunny/data/top3.pcd"
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>());
 	pcl::PolygonMesh mesh;
 	vtkSmartPointer<vtkPolyData> polydata = vtkSmartPointer<vtkPolyData>::New();
@@ -96,7 +94,7 @@ void ply2pcd(const string str_1, const string str_2) {
 }
 
 //
-//¼ÓÔØPCDÎÄ¼şµ½dataÈİÆ÷
+//åŠ è½½PCDæ–‡ä»¶åˆ°dataå®¹å™¨
 void loadData(string fileName, vector<PCD, Eigen::aligned_allocator<PCD>> &models) {
 	PCD p;
 	p.f_name = fileName;
@@ -105,7 +103,7 @@ void loadData(string fileName, vector<PCD, Eigen::aligned_allocator<PCD>> &model
 }
 
 //
-//»ñÈ¡ÎÄ¼şÃûº¯Êı
+//è·å–æ–‡ä»¶åå‡½æ•°
 void getFiles(string dirName,vector<string> &filesVec) {
 	_finddata_t file;
 	long long lf;
@@ -125,13 +123,13 @@ void getFiles(string dirName,vector<string> &filesVec) {
 }
 
 //
-//¾­µäICPÅä×¼º¯Êı
-//downsampleÎªtrue±íÊ¾ÂË²¨
+//ç»å…¸ICPé…å‡†å‡½æ•°
+//downsampleä¸ºtrueè¡¨ç¤ºæ»¤æ³¢
 void pairAlignClassical(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt, PointCloud::Ptr output, Eigen::Matrix4f &final_transform, bool downsample = false) {
 	//
-	//ÎªÁËÒ»ÖÂĞÔºÍ¸ßËÙµÄÏÂ²ÉÑù
-	//×¢Òâ£ºÎªÁË´óÊı¾İ¼¯ĞèÒªÔÊĞíÕâÏî
-	//gridÎªÂË²¨´¦Àí¶ÔÏó
+	//ä¸ºäº†ä¸€è‡´æ€§å’Œé«˜é€Ÿçš„ä¸‹é‡‡æ ·
+	//æ³¨æ„ï¼šä¸ºäº†å¤§æ•°æ®é›†éœ€è¦å…è®¸è¿™é¡¹
+	//gridä¸ºæ»¤æ³¢å¤„ç†å¯¹è±¡
 	clock_t start = clock();
 	PointCloud::Ptr src(new PointCloud);
 	PointCloud::Ptr tgt(new PointCloud);
@@ -160,14 +158,14 @@ void pairAlignClassical(const PointCloud::Ptr cloud_src, const PointCloud::Ptr c
 	icp.setMaximumIterations(300);
 	icp.align(*finalCloud);
 	clock_t end = clock();
-	cout << "¾­µäICPËã·¨:" << endl;
+	cout << "ç»å…¸ICPç®—æ³•:" << endl;
 	cout << "The Fitness Score: " << icp.getFitnessScore() << endl;
 	cout << "The Number Of Iterations: " << icp.nr_iterations_ << endl;
 	cout << "Run time:" << (double)(end - start) / (double)CLOCKS_PER_SEC << "s" << endl;
 
 	Ti = icp.getFinalTransformation();
 	//
-	// µÃµ½Ä¿±êµãÔÆµ½Ô´µãÔÆµÄ±ä»»
+	// å¾—åˆ°ç›®æ ‡ç‚¹äº‘åˆ°æºç‚¹äº‘çš„å˜æ¢
 	targetToSource = Ti.inverse();
 	pcl::transformPointCloud(*cloud_tgt, *finalCloud, targetToSource);
 	viewer->removePointCloud("source");
@@ -183,20 +181,20 @@ void pairAlignClassical(const PointCloud::Ptr cloud_src, const PointCloud::Ptr c
 	viewer->removePointCloud("source");
 	viewer->removePointCloud("target");
 	//
-	//Ìí¼ÓÔ´µãÔÆµ½×ª»»Ä¿±ê
+	//æ·»åŠ æºç‚¹äº‘åˆ°è½¬æ¢ç›®æ ‡
 	*output = *cloud_src + *finalCloud;
 	final_transform = targetToSource;
 }
 
 //
-//Ê¹ÓÃLMËã·¨ÓÅ»¯ºóµÄICPÅä×¼º¯Êı
-//downsampleÎªtrue±íÊ¾ÂË²¨
+//ä½¿ç”¨LMç®—æ³•ä¼˜åŒ–åçš„ICPé…å‡†å‡½æ•°
+//downsampleä¸ºtrueè¡¨ç¤ºæ»¤æ³¢
 void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt, PointCloud::Ptr output, Eigen::Matrix4f &final_transform, bool downsample = false)
 {
 	//
-	//ÎªÁËÒ»ÖÂĞÔºÍ¸ßËÙµÄÏÂ²ÉÑù
-	//×¢Òâ£ºÎªÁË´óÊı¾İ¼¯ĞèÒªÔÊĞíÕâÏî
-	//gridÎªÂË²¨´¦Àí¶ÔÏó
+	//ä¸ºäº†ä¸€è‡´æ€§å’Œé«˜é€Ÿçš„ä¸‹é‡‡æ ·
+	//æ³¨æ„ï¼šä¸ºäº†å¤§æ•°æ®é›†éœ€è¦å…è®¸è¿™é¡¹
+	//gridä¸ºæ»¤æ³¢å¤„ç†å¯¹è±¡
 	clock_t start = clock();
 	PointCloud::Ptr src(new PointCloud);
 	PointCloud::Ptr tgt(new PointCloud);
@@ -215,64 +213,55 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
 		tgt = cloud_tgt;
 	}
 	//
-	//¼ÆËãÇúÃæ·¨Ïß
+	//è®¡ç®—æ›²é¢æ³•çº¿
 	PointCloudWithNormals::Ptr points_with_normals_src(new PointCloudWithNormals);
 	PointCloudWithNormals::Ptr points_with_normals_tgt(new PointCloudWithNormals);
 	pcl::NormalEstimation<PointT, PointNormalT> norm_est;
 	//
-	//ÉèÖÃËÑË÷¶ÔÏóºÍk
+	//è®¾ç½®æœç´¢å¯¹è±¡å’Œk
 	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZ>());
 	norm_est.setSearchMethod(tree);
 	norm_est.setKSearch(30);
 	norm_est.setInputCloud(src);
 	norm_est.compute(*points_with_normals_src);
 	//
-	//Æ´½ÓµãÔÆÊı¾İºÍ·¨Ïß¹À¼Æ
+	//æ‹¼æ¥ç‚¹äº‘æ•°æ®å’Œæ³•çº¿ä¼°è®¡
 	pcl::copyPointCloud(*src, *points_with_normals_src);
 	norm_est.setInputCloud(tgt);
 	norm_est.compute(*points_with_normals_tgt);
 	pcl::copyPointCloud(*tgt, *points_with_normals_tgt);
 	//
-	// Åä×¼
+	// é…å‡†
 	pcl::IterativeClosestPointNonLinear<PointNormalT, PointNormalT> reg;
 	//
-	//ÔÚÒ»¸öÑ­»·ÖĞÔËĞĞÏàÍ¬µÄ×îÓÅ»¯²¢ÇÒÊ¹½á¹û¿ÉÊÓ»¯
+	//åœ¨ä¸€ä¸ªå¾ªç¯ä¸­è¿è¡Œç›¸åŒçš„æœ€ä¼˜åŒ–å¹¶ä¸”ä½¿ç»“æœå¯è§†åŒ–
 	Eigen::Matrix4f Ti = Eigen::Matrix4f::Identity(), prev, targetToSource;
 	PointCloudWithNormals::Ptr reg_result = points_with_normals_src;
 	reg.setInputSource(points_with_normals_src);
 	reg.setInputTarget(points_with_normals_tgt);
 	//
-	//ÉèÖÃÊÕÁ²ÅĞ¶ÏÌõ¼ş
+	//è®¾ç½®æ”¶æ•›åˆ¤æ–­æ¡ä»¶
 	reg.setTransformationEpsilon(1e-10);
 	//
-	//½«Á½¸ö¶ÔÓ¦¹ØÏµÖ®¼äµÄ(src<->tgt)×î´ó¾àÀëÉèÖÃÎª
-	//×¢Òâ£º¸ù¾İÊı¾İ¼¯´óĞ¡À´µ÷Õû
+	//å°†ä¸¤ä¸ªå¯¹åº”å…³ç³»ä¹‹é—´çš„(src<->tgt)æœ€å¤§è·ç¦»è®¾ç½®ä¸º
+	//æ³¨æ„ï¼šæ ¹æ®æ•°æ®é›†å¤§å°æ¥è°ƒæ•´
 	reg.setMaxCorrespondenceDistance(150);
 	reg.setEuclideanFitnessEpsilon(0.01);
 	reg.setMaximumIterations(300);
 	
 	reg.align(*reg_result);
 	clock_t end = clock();
-	cout << "LM¸Ä½øICPËã·¨:" << endl;
+	cout << "LMæ”¹è¿›ICPç®—æ³•:" << endl;
 	cout << "The Fitness Score: " << reg.getFitnessScore() << endl;
 	cout << "The Number Of Iterations: " << reg.nr_iterations_ << endl;
 	cout << "Run time:" << (double)(end - start) / (double)CLOCKS_PER_SEC << "s" << endl;
 
-	/*
-	int i = 0;
-	while (!reg.hasConverged()) {
-		i++;
-		reg.align(*reg_result);
-	}
-	cout << i << endl;
-	*/
-
 	Ti = reg.getFinalTransformation();
 	//
-	// µÃµ½Ä¿±êµãÔÆµ½Ô´µãÔÆµÄ±ä»»
+	// å¾—åˆ°ç›®æ ‡ç‚¹äº‘åˆ°æºç‚¹äº‘çš„å˜æ¢
 	targetToSource = Ti.inverse();
 	//
-	//°ÑÄ¿±êµãÔÆ×ª»»»ØÔ´¿ò¼Ü
+	//æŠŠç›®æ ‡ç‚¹äº‘è½¬æ¢å›æºæ¡†æ¶
 	pcl::transformPointCloud(*cloud_tgt, *output, targetToSource);
 	viewer->removePointCloud("source");
 	viewer->removePointCloud("target");
@@ -286,26 +275,26 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
 	viewer->removePointCloud("source");
 	viewer->removePointCloud("target");
 	//
-	//Ìí¼ÓÔ´µãÔÆµ½×ª»»Ä¿±ê
+	//æ·»åŠ æºç‚¹äº‘åˆ°è½¬æ¢ç›®æ ‡
 	*output += *cloud_src;
 	final_transform = targetToSource;
 	
 }
 
 //
-//Æ½»¬´¦Àí
+//å¹³æ»‘å¤„ç†
 void smoothingHandle(const PointCloud::Ptr cloud_src) {
 	clock_t start = clock();
 	PointCloud::Ptr src(new PointCloud);
 	src = cloud_src;
 
 	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZ>);
-	// Êä³öÎÄ¼şÖĞÓĞPointNormalÀàĞÍ£¬ÓÃÀ´´æ´¢ÒÆ¶¯×îĞ¡¶ş³Ë·¨Ëã³öµÄ·¨Ïß
+	// è¾“å‡ºæ–‡ä»¶ä¸­æœ‰PointNormalç±»å‹ï¼Œç”¨æ¥å­˜å‚¨ç§»åŠ¨æœ€å°äºŒä¹˜æ³•ç®—å‡ºçš„æ³•çº¿
 	pcl::PointCloud<pcl::PointNormal> mls_points;
-	// ¶¨Òå¶ÔÏó (µÚ¶şÖÖ¶¨ÒåÀàĞÍÊÇÎªÁË´æ´¢·¨Ïß, ¼´Ê¹ÓÃ²»µ½Ò²ĞèÒª¶¨Òå³öÀ´)
+	// å®šä¹‰å¯¹è±¡ (ç¬¬äºŒç§å®šä¹‰ç±»å‹æ˜¯ä¸ºäº†å­˜å‚¨æ³•çº¿, å³ä½¿ç”¨ä¸åˆ°ä¹Ÿéœ€è¦å®šä¹‰å‡ºæ¥)
 	pcl::MovingLeastSquares<pcl::PointXYZ, pcl::PointNormal> mls;
 	mls.setComputeNormals(true);
-	//ÉèÖÃ²ÎÊı
+	//è®¾ç½®å‚æ•°
 	mls.setInputCloud(src);
 	mls.setPolynomialFit(true);
 	mls.setSearchMethod(tree);
@@ -314,7 +303,7 @@ void smoothingHandle(const PointCloud::Ptr cloud_src) {
 	mls.process(mls_points);
 	pcl::io::savePCDFile("smoothingBun0009.pcd", mls_points);
 	clock_t end = clock();
-	cout << "Æ½»¬´¦Àí:" << endl;
+	cout << "å¹³æ»‘å¤„ç†:" << endl;
 	cout << "Run time:" << (double)(end - start) / (double)CLOCKS_PER_SEC << "s" << endl;
 
 	PointCloud::Ptr cloud(new PointCloud);
@@ -330,7 +319,7 @@ void smoothingHandle(const PointCloud::Ptr cloud_src) {
 }
 
 //
-//²´ËÉÇúÃæÖØ½¨
+//æ³Šæ¾æ›²é¢é‡å»º
 void poiRestruct(const PointCloud::Ptr cloud_src) {
 	clock_t start = clock();
 	PointCloud::Ptr src(new PointCloud);
@@ -338,14 +327,14 @@ void poiRestruct(const PointCloud::Ptr cloud_src) {
 	src = cloud_src;
 	pcl::NormalEstimation<PointT, PointNormalT> norm_est;
 	//
-	//ÉèÖÃËÑË÷¶ÔÏóºÍk
+	//è®¾ç½®æœç´¢å¯¹è±¡å’Œk
 	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZ>());
 	norm_est.setSearchMethod(tree);
 	norm_est.setKSearch(30);
 	norm_est.setInputCloud(src);
 	norm_est.compute(*points_with_normals_src);
 	//
-	//Æ´½ÓµãÔÆÊı¾İºÍ·¨Ïß¹À¼Æ
+	//æ‹¼æ¥ç‚¹äº‘æ•°æ®å’Œæ³•çº¿ä¼°è®¡
 	pcl::copyPointCloud(*src, *points_with_normals_src);
 	
 	pcl::search::KdTree<pcl::PointNormal>::Ptr tree_2(new pcl::search::KdTree<pcl::PointNormal>());
@@ -363,7 +352,7 @@ void poiRestruct(const PointCloud::Ptr cloud_src) {
 	pcl::PolygonMesh mesh;
 	poisson.reconstruct(mesh);
 	clock_t end = clock();
-	cout << "²´ËÉÇúÃæÖØ½¨Ëã·¨:" << endl;
+	cout << "æ³Šæ¾æ›²é¢é‡å»ºç®—æ³•:" << endl;
 	cout << "Run time:" << (double)(end - start) / (double)CLOCKS_PER_SEC << "s" << endl;
 
 	pcl::io::savePLYFile("this.ply", mesh);
@@ -377,45 +366,45 @@ void poiRestruct(const PointCloud::Ptr cloud_src) {
 }
 
 //
-//Ì°À·Í¶Ó°Èı½Ç»¯
+//è´ªå©ªæŠ•å½±ä¸‰è§’åŒ–
 void restructMethod_2(const PointCloud::Ptr cloud_src) {
 	clock_t start = clock();
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
 	cloud = cloud_src;
 
-	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n;//·¨Ïß¹À¼Æ¶ÔÏó
-	pcl::PointCloud<pcl::Normal>::Ptr normals(new pcl::PointCloud<pcl::Normal>);//´æ´¢¹À¼ÆµÄ·¨Ïß
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZ>);//¶¨ÒåkdÊ÷Ö¸Õë
-	tree->setInputCloud(cloud);//ÓÃcloud¹¹½¨tree¶ÔÏó
+	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n;//æ³•çº¿ä¼°è®¡å¯¹è±¡
+	pcl::PointCloud<pcl::Normal>::Ptr normals(new pcl::PointCloud<pcl::Normal>);//å­˜å‚¨ä¼°è®¡çš„æ³•çº¿
+	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZ>);//å®šä¹‰kdæ ‘æŒ‡é’ˆ
+	tree->setInputCloud(cloud);//ç”¨cloudæ„å»ºtreeå¯¹è±¡
 	n.setInputCloud(cloud);
 	n.setSearchMethod(tree);
 	n.setKSearch(20);
-	n.compute(*normals);//¹À¼Æ·¨Ïß´æ´¢µ½ÆäÖĞ
+	n.compute(*normals);//ä¼°è®¡æ³•çº¿å­˜å‚¨åˆ°å…¶ä¸­
 	pcl::PointCloud<pcl::PointNormal>::Ptr cloud_with_normals(new pcl::PointCloud<pcl::PointNormal>);
-	pcl::concatenateFields(*cloud, *normals, *cloud_with_normals);//Á¬½Ó×Ö¶Î
+	pcl::concatenateFields(*cloud, *normals, *cloud_with_normals);//è¿æ¥å­—æ®µ
 	//* cloud_with_normals = cloud + normals
 
-	//¶¨ÒåËÑË÷Ê÷¶ÔÏó
+	//å®šä¹‰æœç´¢æ ‘å¯¹è±¡
 	pcl::search::KdTree<pcl::PointNormal>::Ptr tree2(new pcl::search::KdTree<pcl::PointNormal>);
-	tree2->setInputCloud(cloud_with_normals);   //µãÔÆ¹¹½¨ËÑË÷Ê÷
+	tree2->setInputCloud(cloud_with_normals);   //ç‚¹äº‘æ„å»ºæœç´¢æ ‘
 
-	pcl::GreedyProjectionTriangulation<pcl::PointNormal> gp3;//¶¨ÒåÈı½Ç»¯¶ÔÏó
-	pcl::PolygonMesh triangles;//´æ´¢×îÖÕÈı½Ç»¯µÄÍøÂçÄ£ĞÍ
+	pcl::GreedyProjectionTriangulation<pcl::PointNormal> gp3;//å®šä¹‰ä¸‰è§’åŒ–å¯¹è±¡
+	pcl::PolygonMesh triangles;//å­˜å‚¨æœ€ç»ˆä¸‰è§’åŒ–çš„ç½‘ç»œæ¨¡å‹
 
-	gp3.setSearchRadius(2.5);//ÉèÖÃÁ¬½ÓµãÖ®¼äµÄ×î´ó¾àÀë£¬£¨¼´ÊÇÈı½ÇĞÎ×î´ó±ß³¤£©
-	gp3.setMu(2.5);  //ÉèÖÃ±»Ñù±¾µãËÑË÷Æä½üÁÚµãµÄ×îÔ¶¾àÀëÎª2.5£¬ÎªÁËÊ¹ÓÃµãÔÆÃÜ¶ÈµÄ±ä»¯
-	gp3.setMaximumNearestNeighbors(100);    //ÉèÖÃÑù±¾µã¿ÉËÑË÷µÄÁÚÓò¸öÊı
-	gp3.setMaximumSurfaceAngle(M_PI / 4); // ÉèÖÃÄ³µã·¨Ïß·½ÏòÆ«ÀëÑù±¾µã·¨ÏßµÄ×î´ó½Ç¶È45
-	gp3.setMinimumAngle(M_PI / 18); // ÉèÖÃÈı½Ç»¯ºóµÃµ½µÄÈı½ÇĞÎÄÚ½ÇµÄ×îĞ¡µÄ½Ç¶ÈÎª10
-	gp3.setMaximumAngle(2*M_PI / 3); // ÉèÖÃÈı½Ç»¯ºóµÃµ½µÄÈı½ÇĞÎÄÚ½ÇµÄ×î´ó½Ç¶ÈÎª120
-	gp3.setNormalConsistency(false);  //ÉèÖÃ¸Ã²ÎÊı±£Ö¤·¨Ïß³¯ÏòÒ»ÖÂ
+	gp3.setSearchRadius(2.5);//è®¾ç½®è¿æ¥ç‚¹ä¹‹é—´çš„æœ€å¤§è·ç¦»ï¼Œï¼ˆå³æ˜¯ä¸‰è§’å½¢æœ€å¤§è¾¹é•¿ï¼‰
+	gp3.setMu(2.5);  //è®¾ç½®è¢«æ ·æœ¬ç‚¹æœç´¢å…¶è¿‘é‚»ç‚¹çš„æœ€è¿œè·ç¦»ä¸º2.5ï¼Œä¸ºäº†ä½¿ç”¨ç‚¹äº‘å¯†åº¦çš„å˜åŒ–
+	gp3.setMaximumNearestNeighbors(100);    //è®¾ç½®æ ·æœ¬ç‚¹å¯æœç´¢çš„é‚»åŸŸä¸ªæ•°
+	gp3.setMaximumSurfaceAngle(M_PI / 4); // è®¾ç½®æŸç‚¹æ³•çº¿æ–¹å‘åç¦»æ ·æœ¬ç‚¹æ³•çº¿çš„æœ€å¤§è§’åº¦45
+	gp3.setMinimumAngle(M_PI / 18); // è®¾ç½®ä¸‰è§’åŒ–åå¾—åˆ°çš„ä¸‰è§’å½¢å†…è§’çš„æœ€å°çš„è§’åº¦ä¸º10
+	gp3.setMaximumAngle(2*M_PI / 3); // è®¾ç½®ä¸‰è§’åŒ–åå¾—åˆ°çš„ä¸‰è§’å½¢å†…è§’çš„æœ€å¤§è§’åº¦ä¸º120
+	gp3.setNormalConsistency(false);  //è®¾ç½®è¯¥å‚æ•°ä¿è¯æ³•çº¿æœå‘ä¸€è‡´
 
-	gp3.setInputCloud(cloud_with_normals);     //ÉèÖÃÊäÈëµãÔÆÎªÓĞÏòµãÔÆ
-	gp3.setSearchMethod(tree2); //ÉèÖÃËÑË÷·½Ê½
-	gp3.reconstruct(triangles); //ÖØ½¨ÌáÈ¡Èı½Ç»¯
+	gp3.setInputCloud(cloud_with_normals);     //è®¾ç½®è¾“å…¥ç‚¹äº‘ä¸ºæœ‰å‘ç‚¹äº‘
+	gp3.setSearchMethod(tree2); //è®¾ç½®æœç´¢æ–¹å¼
+	gp3.reconstruct(triangles); //é‡å»ºæå–ä¸‰è§’åŒ–
 
 	clock_t end = clock();
-	cout << "Ì°À·Í¶Ó°Èı½Ç»¯Ëã·¨:" << endl;
+	cout << "è´ªå©ªæŠ•å½±ä¸‰è§’åŒ–ç®—æ³•:" << endl;
 	cout << "Run time:" << (double)(end - start) / (double)CLOCKS_PER_SEC << "s" << endl;
 
 	//vector<int> parts = gp3.getPartIDs();
@@ -431,36 +420,36 @@ void restructMethod_2(const PointCloud::Ptr cloud_src) {
 }
 
 //
-//ÒÆ¶¯Á¢·½Ìå
+//ç§»åŠ¨ç«‹æ–¹ä½“
 void restructMethod_3(const PointCloud::Ptr cloud_src) {
 	clock_t start = clock();
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
 	cloud = cloud_src;
-	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n;//·¨Ïß¹À¼Æ¶ÔÏó
-	pcl::PointCloud<pcl::Normal>::Ptr normals(new pcl::PointCloud<pcl::Normal>);//´æ´¢¹À¼ÆµÄ·¨Ïß
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZ>);//¶¨ÒåkdÊ÷Ö¸Õë
-	tree->setInputCloud(cloud);//ÓÃcloud¹¹½¨tree¶ÔÏó
+	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n;//æ³•çº¿ä¼°è®¡å¯¹è±¡
+	pcl::PointCloud<pcl::Normal>::Ptr normals(new pcl::PointCloud<pcl::Normal>);//å­˜å‚¨ä¼°è®¡çš„æ³•çº¿
+	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZ>);//å®šä¹‰kdæ ‘æŒ‡é’ˆ
+	tree->setInputCloud(cloud);//ç”¨cloudæ„å»ºtreeå¯¹è±¡
 	n.setInputCloud(cloud);
 	n.setSearchMethod(tree);
 	n.setKSearch(20);
-	n.compute(*normals);//¹À¼Æ·¨Ïß´æ´¢µ½ÆäÖĞ
+	n.compute(*normals);//ä¼°è®¡æ³•çº¿å­˜å‚¨åˆ°å…¶ä¸­
 	pcl::PointCloud<pcl::PointNormal>::Ptr cloud_with_normals(new pcl::PointCloud<pcl::PointNormal>);
-	pcl::concatenateFields(*cloud, *normals, *cloud_with_normals);//Á¬½Ó×Ö¶Î
+	pcl::concatenateFields(*cloud, *normals, *cloud_with_normals);//è¿æ¥å­—æ®µ
 
 	pcl::search::KdTree<pcl::PointNormal>::Ptr tree2(new pcl::search::KdTree<pcl::PointNormal>);
 	tree2->setInputCloud(cloud_with_normals);
 	pcl::MarchingCubes<pcl::PointNormal>::Ptr mc(new pcl::MarchingCubesHoppe<pcl::PointNormal>);
-	//ÉèÖÃMarchingCubes¶ÔÏóµÄ²ÎÊı
+	//è®¾ç½®MarchingCubeså¯¹è±¡çš„å‚æ•°
 	mc->setIsoLevel(0.0f);
 	mc->setGridResolution(30, 30, 30);
 	mc->setPercentageExtendGrid(0.0f);
 	mc->setSearchMethod(tree2);
 	mc->setInputCloud(cloud_with_normals);
 
-	pcl::PolygonMesh mesh;//Ö´ĞĞÖØ¹¹£¬½á¹û±£´æÔÚmeshÖĞ
+	pcl::PolygonMesh mesh;//æ‰§è¡Œé‡æ„ï¼Œç»“æœä¿å­˜åœ¨meshä¸­
 	mc->reconstruct(mesh);
 	clock_t end = clock();
-	cout << "ÒÆ¶¯Á¢·½ÌåËã·¨:" << endl;
+	cout << "ç§»åŠ¨ç«‹æ–¹ä½“ç®—æ³•:" << endl;
 	cout << "Run time:" << (double)(end - start) / (double)CLOCKS_PER_SEC << "s" << endl;
 
 	viewer->removePolygonMesh("mesh");
@@ -472,20 +461,20 @@ void restructMethod_3(const PointCloud::Ptr cloud_src) {
 }
 
 //
-//¹Ø¼üµãÊ¹ÓÃ
+//å…³é”®ç‚¹ä½¿ç”¨
 void SIFTKeyPoint(const PointCloud::Ptr cloud_src, PointCloud::Ptr &cloud_key) {
 	pcl::SIFTKeypoint<pcl::PointXYZ, pcl::PointWithScale> sift;
 	pcl::PointCloud<pcl::PointWithScale> result;
 	sift.setInputCloud(cloud_src);
 	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZ>());
 	sift.setSearchMethod(tree);
-	//sift.setScales(min_scale, n_octaves, n_scales_per_octave);//Ö¸¶¨ËÑË÷¹Ø¼üµãµÄ³ß¶È·¶Î§
+	//sift.setScales(min_scale, n_octaves, n_scales_per_octave);//æŒ‡å®šæœç´¢å…³é”®ç‚¹çš„å°ºåº¦èŒƒå›´
 	sift.setScales(0.001, 6, 4);
-	//sift.setMinimumContrast(min_contrast);//ÉèÖÃÏŞÖÆ¹Ø¼üµã¼ì²âµÄãĞÖµ
+	//sift.setMinimumContrast(min_contrast);//è®¾ç½®é™åˆ¶å…³é”®ç‚¹æ£€æµ‹çš„é˜ˆå€¼
 	sift.setMinimumContrast(0.00001);
 	sift.compute(result);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_temp(new pcl::PointCloud<pcl::PointXYZ>);
-	pcl::copyPointCloud(result, *cloud_temp);//½«µãÀàĞÍpcl::PointWithScaleµÄÊı¾İ×ª»»ÎªµãÀàĞÍpcl::PointXYZµÄÊı¾İ
+	pcl::copyPointCloud(result, *cloud_temp);//å°†ç‚¹ç±»å‹pcl::PointWithScaleçš„æ•°æ®è½¬æ¢ä¸ºç‚¹ç±»å‹pcl::PointXYZçš„æ•°æ®
 	pcl::copyPointCloud(result, *cloud_key);
 	cout << cloud_temp->size() << endl;
 	cout << cloud_temp->points.size() << endl;
@@ -505,30 +494,8 @@ void SIFTKeyPoint(const PointCloud::Ptr cloud_src, PointCloud::Ptr &cloud_key) {
 }
 
 //
-//PFHÌØÕ÷ÃèÊö
+//PFHç‰¹å¾æè¿°
 void PFHFeatures(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt) {
-	/*
-	pcl::PFHEstimation<pcl::PointXYZ, pcl::Normal, pcl::PFHSignature125> pfh;
-	pfh.setInputCloud(cloud_key);
-
-	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n;//·¨Ïß¹À¼Æ¶ÔÏó
-	pcl::PointCloud<pcl::Normal>::Ptr normals(new pcl::PointCloud<pcl::Normal>);//´æ´¢¹À¼ÆµÄ·¨Ïß
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZ>);//¶¨ÒåkdÊ÷Ö¸Õë
-	tree->setInputCloud(cloud_key);//ÓÃcloud¹¹½¨tree¶ÔÏó
-	n.setInputCloud(cloud_key);
-	n.setSearchMethod(tree);
-	n.setKSearch(20);
-	n.compute(*normals);//¹À¼Æ·¨Ïß´æ´¢µ½ÆäÖĞ
-
-	pfh.setInputNormals(normals);
-	//pcl::KdTreeFLANN<pcl::PointXYZ>::Ptr tree_k;
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_k(new pcl::search::KdTree<pcl::PointXYZ>);//¶¨ÒåkdÊ÷Ö¸Õë
-	pfh.setSearchMethod(tree_k);
-	pcl::PointCloud<pcl::PFHSignature125>::Ptr pfhs(new pcl::PointCloud<pcl::PFHSignature125>());
-	pfh.setRadiusSearch(0.05);
-	pfh.compute(*pfhs);
-	cout << pfhs->points.size() << endl;
-	*/
 
 	PointCloud::Ptr src(new PointCloud);
 	PointCloud::Ptr tgt(new PointCloud);
@@ -544,41 +511,39 @@ void PFHFeatures(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tg
 	pfh_src.setInputCloud(src);
 	pfh_tgt.setInputCloud(tgt);
 
-	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n_src;//·¨Ïß¹À¼Æ¶ÔÏó
-	pcl::PointCloud<pcl::Normal>::Ptr normals_src(new pcl::PointCloud<pcl::Normal>);//´æ´¢¹À¼ÆµÄ·¨Ïß
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_src_2(new pcl::search::KdTree<pcl::PointXYZ>);//¶¨ÒåkdÊ÷Ö¸Õë
-	tree_src_2->setInputCloud(src);//ÓÃcloud¹¹½¨tree¶ÔÏó
+	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n_src;//æ³•çº¿ä¼°è®¡å¯¹è±¡
+	pcl::PointCloud<pcl::Normal>::Ptr normals_src(new pcl::PointCloud<pcl::Normal>);//å­˜å‚¨ä¼°è®¡çš„æ³•çº¿
+	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_src_2(new pcl::search::KdTree<pcl::PointXYZ>);//å®šä¹‰kdæ ‘æŒ‡é’ˆ
+	tree_src_2->setInputCloud(src);//ç”¨cloudæ„å»ºtreeå¯¹è±¡
 	n_src.setInputCloud(src);
 	n_src.setSearchMethod(tree_src_2);
 	n_src.setKSearch(20);
-	n_src.compute(*normals_src);//¹À¼Æ·¨Ïß´æ´¢µ½ÆäÖĞ
+	n_src.compute(*normals_src);//ä¼°è®¡æ³•çº¿å­˜å‚¨åˆ°å…¶ä¸­
 	pfh_src.setInputNormals(normals_src);
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_k_src(new pcl::search::KdTree<pcl::PointXYZ>);//¶¨ÒåkdÊ÷Ö¸Õë
+	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_k_src(new pcl::search::KdTree<pcl::PointXYZ>);//å®šä¹‰kdæ ‘æŒ‡é’ˆ
 	pfh_src.setSearchMethod(tree_k_src);
 	pcl::PointCloud<pcl::PFHSignature125>::Ptr pfhs_src(new pcl::PointCloud<pcl::PFHSignature125>());
 	pfh_src.setRadiusSearch(0.05);
 	pfh_src.compute(*pfhs_src);
 	cout << "source keypoints:" << pfhs_src->points.size() << endl;
-	//cout << "######" << endl;
 
-	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n_tgt;//·¨Ïß¹À¼Æ¶ÔÏó
-	pcl::PointCloud<pcl::Normal>::Ptr normals_tgt(new pcl::PointCloud<pcl::Normal>);//´æ´¢¹À¼ÆµÄ·¨Ïß
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_tgt_2(new pcl::search::KdTree<pcl::PointXYZ>);//¶¨ÒåkdÊ÷Ö¸Õë
-	tree_tgt_2->setInputCloud(tgt);//ÓÃcloud¹¹½¨tree¶ÔÏó
+	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n_tgt;//æ³•çº¿ä¼°è®¡å¯¹è±¡
+	pcl::PointCloud<pcl::Normal>::Ptr normals_tgt(new pcl::PointCloud<pcl::Normal>);//å­˜å‚¨ä¼°è®¡çš„æ³•çº¿
+	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_tgt_2(new pcl::search::KdTree<pcl::PointXYZ>);//å®šä¹‰kdæ ‘æŒ‡é’ˆ
+	tree_tgt_2->setInputCloud(tgt);//ç”¨cloudæ„å»ºtreeå¯¹è±¡
 	n_tgt.setInputCloud(tgt);
 	n_tgt.setSearchMethod(tree_tgt_2);
 	n_tgt.setKSearch(20);
-	n_tgt.compute(*normals_tgt);//¹À¼Æ·¨Ïß´æ´¢µ½ÆäÖĞ
+	n_tgt.compute(*normals_tgt);//ä¼°è®¡æ³•çº¿å­˜å‚¨åˆ°å…¶ä¸­
 	pfh_tgt.setInputNormals(normals_tgt);
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_k_tgt(new pcl::search::KdTree<pcl::PointXYZ>);//¶¨ÒåkdÊ÷Ö¸Õë
+	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_k_tgt(new pcl::search::KdTree<pcl::PointXYZ>);//å®šä¹‰kdæ ‘æŒ‡é’ˆ
 	pfh_tgt.setSearchMethod(tree_k_tgt);
 	pcl::PointCloud<pcl::PFHSignature125>::Ptr pfhs_tgt(new pcl::PointCloud<pcl::PFHSignature125>());
 	pfh_tgt.setRadiusSearch(0.05);
 	pfh_tgt.compute(*pfhs_tgt);
 	cout << "target keypoints:" << pfhs_tgt->points.size() << endl;
-	//cout << "@@@@@@" << endl;
 
-	//SACÅä×¼
+	//SACé…å‡†
 	pcl::SampleConsensusInitialAlignment<pcl::PointXYZ, pcl::PointXYZ, pcl::PFHSignature125> scia;
 	scia.setInputSource(src);
 	scia.setInputTarget(tgt);
@@ -591,7 +556,7 @@ void PFHFeatures(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tg
 	scia.align(*sac_result);
 	clock_t end = clock();
 
-	cout << "PFHËã·¨:" << endl;
+	cout << "PFHç®—æ³•:" << endl;
 	cout << "The Fitness Score: " << scia.getFitnessScore() << endl;
 	cout << "Run time:" << (double)(end - start) / (double)CLOCKS_PER_SEC << "s" << endl;
 
@@ -623,7 +588,6 @@ void PFHFeatures(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tg
 //
 void SIFT_PFH(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt) {
 	clock_t start = clock();
-	//cout << cloud_src->points.size() << endl << cloud_tgt->points.size() << endl;
 	pcl::SIFTKeypoint<pcl::PointXYZ, pcl::PointWithScale> sift_src;
 	pcl::SIFTKeypoint<pcl::PointXYZ, pcl::PointWithScale> sift_tgt;
 	pcl::PointCloud<pcl::PointWithScale> result_src;
@@ -634,13 +598,12 @@ void SIFT_PFH(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt) 
 	sift_src.setInputCloud(cloud_src);
 	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_src_1(new pcl::search::KdTree<pcl::PointXYZ>());
 	sift_src.setSearchMethod(tree_src_1);
-	//sift.setScales(min_scale, n_octaves, n_scales_per_octave);//Ö¸¶¨ËÑË÷¹Ø¼üµãµÄ³ß¶È·¶Î§
+	//sift.setScales(min_scale, n_octaves, n_scales_per_octave);//æŒ‡å®šæœç´¢å…³é”®ç‚¹çš„å°ºåº¦èŒƒå›´
 	sift_src.setScales(0.001, 6, 4);
-	//sift.setMinimumContrast(min_contrast);//ÉèÖÃÏŞÖÆ¹Ø¼üµã¼ì²âµÄãĞÖµ
+	//sift.setMinimumContrast(min_contrast);//è®¾ç½®é™åˆ¶å…³é”®ç‚¹æ£€æµ‹çš„é˜ˆå€¼
 	sift_src.setMinimumContrast(0.00001);
 	sift_src.compute(result_src);
-	pcl::copyPointCloud(result_src, *cloud_key_src);//½«µãÀàĞÍpcl::PointWithScaleµÄÊı¾İ×ª»»ÎªµãÀàĞÍpcl::PointXYZµÄÊı¾İ
-	//cout << cloud_key_src->points.size() << endl;
+	pcl::copyPointCloud(result_src, *cloud_key_src);//å°†ç‚¹ç±»å‹pcl::PointWithScaleçš„æ•°æ®è½¬æ¢ä¸ºç‚¹ç±»å‹pcl::PointXYZçš„æ•°æ®
 	
 	sift_tgt.setInputCloud(cloud_tgt);
 	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_tgt_1(new pcl::search::KdTree<pcl::PointXYZ>());
@@ -648,8 +611,7 @@ void SIFT_PFH(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt) 
 	sift_tgt.setScales(0.001, 6, 4);
 	sift_tgt.setMinimumContrast(0.00001);
 	sift_tgt.compute(result_tgt);
-	pcl::copyPointCloud(result_tgt, *cloud_key_tgt);//½«µãÀàĞÍpcl::PointWithScaleµÄÊı¾İ×ª»»ÎªµãÀàĞÍpcl::PointXYZµÄÊı¾İ
-	//cout << cloud_key_tgt->points.size() << endl;
+	pcl::copyPointCloud(result_tgt, *cloud_key_tgt);//å°†ç‚¹ç±»å‹pcl::PointWithScaleçš„æ•°æ®è½¬æ¢ä¸ºç‚¹ç±»å‹pcl::PointXYZçš„æ•°æ®
 
 
 	pcl::PFHEstimation<pcl::PointXYZ, pcl::Normal, pcl::PFHSignature125> pfh_src;
@@ -657,41 +619,39 @@ void SIFT_PFH(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt) 
 	pfh_src.setInputCloud(cloud_key_src);
 	pfh_tgt.setInputCloud(cloud_key_tgt);
 
-	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n_src;//·¨Ïß¹À¼Æ¶ÔÏó
-	pcl::PointCloud<pcl::Normal>::Ptr normals_src(new pcl::PointCloud<pcl::Normal>);//´æ´¢¹À¼ÆµÄ·¨Ïß
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_src_2(new pcl::search::KdTree<pcl::PointXYZ>);//¶¨ÒåkdÊ÷Ö¸Õë
-	tree_src_2->setInputCloud(cloud_key_src);//ÓÃcloud¹¹½¨tree¶ÔÏó
+	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n_src;//æ³•çº¿ä¼°è®¡å¯¹è±¡
+	pcl::PointCloud<pcl::Normal>::Ptr normals_src(new pcl::PointCloud<pcl::Normal>);//å­˜å‚¨ä¼°è®¡çš„æ³•çº¿
+	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_src_2(new pcl::search::KdTree<pcl::PointXYZ>);//å®šä¹‰kdæ ‘æŒ‡é’ˆ
+	tree_src_2->setInputCloud(cloud_key_src);//ç”¨cloudæ„å»ºtreeå¯¹è±¡
 	n_src.setInputCloud(cloud_key_src);
 	n_src.setSearchMethod(tree_src_2);
 	n_src.setKSearch(20);
-	n_src.compute(*normals_src);//¹À¼Æ·¨Ïß´æ´¢µ½ÆäÖĞ
+	n_src.compute(*normals_src);//ä¼°è®¡æ³•çº¿å­˜å‚¨åˆ°å…¶ä¸­
 	pfh_src.setInputNormals(normals_src);
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_k_src(new pcl::search::KdTree<pcl::PointXYZ>);//¶¨ÒåkdÊ÷Ö¸Õë
+	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_k_src(new pcl::search::KdTree<pcl::PointXYZ>);//å®šä¹‰kdæ ‘æŒ‡é’ˆ
 	pfh_src.setSearchMethod(tree_k_src);
 	pcl::PointCloud<pcl::PFHSignature125>::Ptr pfhs_src(new pcl::PointCloud<pcl::PFHSignature125>());
 	pfh_src.setRadiusSearch(0.05);
 	pfh_src.compute(*pfhs_src);
 	cout << "source keypoints:" << pfhs_src->points.size() << endl;
-	//cout << "######" << endl;
 
-	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n_tgt;//·¨Ïß¹À¼Æ¶ÔÏó
-	pcl::PointCloud<pcl::Normal>::Ptr normals_tgt(new pcl::PointCloud<pcl::Normal>);//´æ´¢¹À¼ÆµÄ·¨Ïß
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_tgt_2(new pcl::search::KdTree<pcl::PointXYZ>);//¶¨ÒåkdÊ÷Ö¸Õë
-	tree_tgt_2->setInputCloud(cloud_key_tgt);//ÓÃcloud¹¹½¨tree¶ÔÏó
+	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> n_tgt;//æ³•çº¿ä¼°è®¡å¯¹è±¡
+	pcl::PointCloud<pcl::Normal>::Ptr normals_tgt(new pcl::PointCloud<pcl::Normal>);//å­˜å‚¨ä¼°è®¡çš„æ³•çº¿
+	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_tgt_2(new pcl::search::KdTree<pcl::PointXYZ>);//å®šä¹‰kdæ ‘æŒ‡é’ˆ
+	tree_tgt_2->setInputCloud(cloud_key_tgt);//ç”¨cloudæ„å»ºtreeå¯¹è±¡
 	n_tgt.setInputCloud(cloud_key_tgt);
 	n_tgt.setSearchMethod(tree_tgt_2);
 	n_tgt.setKSearch(20);
-	n_tgt.compute(*normals_tgt);//¹À¼Æ·¨Ïß´æ´¢µ½ÆäÖĞ
+	n_tgt.compute(*normals_tgt);//ä¼°è®¡æ³•çº¿å­˜å‚¨åˆ°å…¶ä¸­
 	pfh_tgt.setInputNormals(normals_tgt);
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_k_tgt(new pcl::search::KdTree<pcl::PointXYZ>);//¶¨ÒåkdÊ÷Ö¸Õë
+	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree_k_tgt(new pcl::search::KdTree<pcl::PointXYZ>);//å®šä¹‰kdæ ‘æŒ‡é’ˆ
 	pfh_tgt.setSearchMethod(tree_k_tgt);
 	pcl::PointCloud<pcl::PFHSignature125>::Ptr pfhs_tgt(new pcl::PointCloud<pcl::PFHSignature125>());
 	pfh_tgt.setRadiusSearch(0.05);
 	pfh_tgt.compute(*pfhs_tgt);
 	cout << "target keypoints:" << pfhs_tgt->points.size() << endl;
-	//cout << "@@@@@@" << endl;
 
-	//SACÅä×¼
+	//SACé…å‡†
 	pcl::SampleConsensusInitialAlignment<pcl::PointXYZ, pcl::PointXYZ, pcl::PFHSignature125> scia;
 	scia.setInputSource(cloud_key_src);
 	scia.setInputTarget(cloud_key_tgt);
@@ -704,7 +664,7 @@ void SIFT_PFH(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt) 
 	scia.align(*sac_result);
 	clock_t end = clock();
 
-	cout << "SIFT¡ª¡ªPFHËã·¨:" << endl;
+	cout << "SIFTâ€”â€”PFHç®—æ³•:" << endl;
 	cout << "The Fitness Score: " << scia.getFitnessScore() << endl;
 	cout << "Run time:" << (double)(end - start) / (double)CLOCKS_PER_SEC << "s" << endl;
 
@@ -733,16 +693,16 @@ void SIFT_PFH(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt) 
 
 int main(int argc, char** argv)
 {
-	cout << "¹¦ÄÜÑ¡ÔñËµÃ÷£º" << endl;
+	cout << "åŠŸèƒ½é€‰æ‹©è¯´æ˜ï¼š" << endl;
 	cout << "##########" << endl;
-	cout << "-p1 ¾­µäICP£º" << endl;
-	cout << "-p2 LMÓÅ»¯µÄICP£º" << endl;
-	cout << "-sp1 ÏÂ²ÉÑù+PFHÌØÕ÷+´ÖÅä×¼£º" << endl;
-	cout << "-sp2 SIFT¹Ø¼üµã+PFHÌØÕ÷+´ÖÅä×¼£º" << endl;
-	cout << "-s Æ½»¬´¦Àí£º" << endl;
-	cout << "-q1 ¾­µäMC£º" << endl;
-	cout << "-q2 ²´ËÉÇúÃæÖØ½¨£º" << endl;
-	cout << "-q3 Ì°À·Í¶Ó°Èı½Ç»¯£º" << endl;
+	cout << "-p1 ç»å…¸ICPï¼š" << endl;
+	cout << "-p2 LMä¼˜åŒ–çš„ICPï¼š" << endl;
+	cout << "-sp1 ä¸‹é‡‡æ ·+PFHç‰¹å¾+ç²—é…å‡†ï¼š" << endl;
+	cout << "-sp2 SIFTå…³é”®ç‚¹+PFHç‰¹å¾+ç²—é…å‡†ï¼š" << endl;
+	cout << "-s å¹³æ»‘å¤„ç†ï¼š" << endl;
+	cout << "-q1 ç»å…¸MCï¼š" << endl;
+	cout << "-q2 æ³Šæ¾æ›²é¢é‡å»ºï¼š" << endl;
+	cout << "-q3 è´ªå©ªæŠ•å½±ä¸‰è§’åŒ–ï¼š" << endl;
 	vector<PCD, Eigen::aligned_allocator<PCD>> bun;
 	string str_1, str_2;
 	Eigen::Matrix4f GlobalTransform = Eigen::Matrix4f::Identity(), pairTransform;
@@ -796,142 +756,52 @@ int main(int argc, char** argv)
 	if (argc == 4) {
 		if (strcmp(argv[1], "-p1") == 0) {
 			//
-			//¾­µäICPËã·¨
+			//ç»å…¸ICPç®—æ³•
 			pairAlignClassical(source, target, temp, pairTransform, false);
 		}
 		else if (strcmp(argv[1], "-p2") == 0) {
 			//
-			//Ê¹ÓÃLMËã·¨ÓÅ»¯ºóµÄICPÅä×¼
+			//ä½¿ç”¨LMç®—æ³•ä¼˜åŒ–åçš„ICPé…å‡†
 			pairAlign(source, target, temp, pairTransform, false);
 		}
 		else if (strcmp(argv[1], "-sp1") == 0) {
 			//
-			//PFHÌØÕ÷ÃèÊö
+			//PFHç‰¹å¾æè¿°
 			PFHFeatures(source, target);
 		}
 		else if (strcmp(argv[1], "-sp2") == 0) {
 			//
-			//SIFT¹Ø¼üµã+PFHÌØÕ÷ÃèÊö
+			//SIFTå…³é”®ç‚¹+PFHç‰¹å¾æè¿°
 			SIFT_PFH(source, target);
 		}
 		else {
-			cout << "²ÎÊıÊäÈëÓĞÎó£¡" << endl;
+			cout << "å‚æ•°è¾“å…¥æœ‰è¯¯ï¼" << endl;
 		}
 	}
 	if (argc == 3) {
 		if (strcmp(argv[1], "-s") == 0) {
 			//
-			//Æ½»¬´¦Àí
+			//å¹³æ»‘å¤„ç†
 			smoothingHandle(source);
 		}
 		else if (strcmp(argv[1], "-q1") == 0) {
 			//
-			//ÒÆ¶¯Á¢·½ÌåËã·¨
+			//ç§»åŠ¨ç«‹æ–¹ä½“ç®—æ³•
 			restructMethod_3(source);
 		}
 		else if (strcmp(argv[1], "-q2") == 0) {
 			//
-			//²´ËÉÇúÃæÖØ½¨
-			//loadData("C:/Users/Scott/Desktop/bunny.tar/bunny/reconstruction/smoothingBun0009.pcd", bun);
+			//æ³Šæ¾æ›²é¢é‡å»º
 			poiRestruct(source);
 		}
 		else if (strcmp(argv[1], "-q3") == 0) {
 			//
-			//Ì°À·Í¶Ó°Èı½Ç»¯
+			//è´ªå©ªæŠ•å½±ä¸‰è§’åŒ–
 			restructMethod_2(source);
 		}
 		else {
-			cout << "²ÎÊıÊäÈëÓĞÎó£¡" << endl;
+			cout << "å‚æ•°è¾“å…¥æœ‰è¯¯ï¼" << endl;
 		}
 	}
-	
-	//
-	//¹Ø¼üµãÊ¹ÓÃ,PFHÌØÕ÷ÃèÊö
-	//pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_key(new pcl::PointCloud<pcl::PointXYZ>);
-	//SIFTKeyPoint(bun[0].cloud,cloud_key);
-	//cout << cloud_key->points.size() << endl;
-	//PFHFeatures(bun[0].cloud, cloud_key);
-
-
-	/*
-	loadData("C:/Users/Scott/Desktop/bunny.tar/bunny/reconstruction/bun_zipper.pcd", bun);
-	//int v1(0);
-	viewer->createViewPort(0.0, 0.0, 0.5, 1.0, v1);
-	viewer->setBackgroundColor(255, 255, 255, v1);
-	//int v2(0);
-	viewer->createViewPort(0.5, 0.0, 1.0, 1.0, v2);
-	viewer->setBackgroundColor(255, 255, 255, v2);
-	viewer->addText("source pointclod dataset(red)", 10, 10, 0, 0, 0, "v1", v1);
-	viewer->removePointCloud("v1_source");
-	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> src_color(bun[0].cloud, 255, 0, 0);
-	viewer->addPointCloud(bun[0].cloud, src_color, "v1_source", v1);
-	PCL_INFO("Press q to begin the registration.\n");
-	viewer->spin();
-	source = bun[0].cloud;
-	poiRestruct(source);
-	*/
-	/*
-	//loadData("C:/Users/Scott/Desktop/bunny.tar/bunny/reconstruction/bun_zipper.pcd", bun);
-	//loadData("C:/Users/Scott/Desktop/bunny.tar/bunny/reconstruction/bun_zipper_t.pcd", bun);
-	loadData("C:/Users/Scott/Desktop/bunny.tar/bunny/reconstruction/bun_zipper.pcd", bun);
-	loadData("C:/Users/Scott/Desktop/bunny.tar/bunny/reconstruction/bun_zipper_t.pcd", bun);
-
-	//int v1(0);
-	viewer->createViewPort(0.0, 0.0, 0.5, 1.0, v1);
-	viewer->setBackgroundColor(255, 255, 255, v1);
-	viewer->addText("source pointclod dataset(red), target pointcloud dataset(green)", 10, 10, 0, 0, 0, "v1", v1);
-	//int v2(0);
-	viewer->createViewPort(0.5, 0.0, 1.0, 1.0, v2);
-	viewer->setBackgroundColor(255, 255, 255, v2);
-	viewer->removePointCloud("v1_target");
-	viewer->removePointCloud("v1_source");
-	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> src_color(bun[0].cloud, 255, 0, 0);
-	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> tgt_color(bun[1].cloud, 0, 255, 0);
-	viewer->addPointCloud(bun[0].cloud, src_color, "v1_source", v1);
-	viewer->addPointCloud(bun[1].cloud, tgt_color, "v1_target", v1);
-	PCL_INFO("Press q to begin the registration.\n");
-	viewer->spin();
-
-	source = bun[0].cloud;
-	target = bun[1].cloud;
-
-	//pairAlignClassical(source, target, temp, pairTransform, false);
-	//pairAlign(source, target, temp, pairTransform, false);
-	//PFHFeatures(source, target);
-	SIFT_PFH(source, target);*/
-	
-
-	/*
-	loadData("C:/Users/Scott/Desktop/bunny.tar/bunny/glo/glo.pcd", bun);
-
-	PointCloud::Ptr src(new PointCloud);
-	pcl::VoxelGrid<PointT> grid;
-	grid.setLeafSize(0.8, 0.8, 0.8);
-	source = bun[0].cloud;
-	grid.setInputCloud(source);
-	grid.filter(*src);
-	pcl::io::savePCDFileASCII("C:/Users/Scott/Desktop/bunny.tar/bunny/glo/gloo.pcd", *src);
-	
-	//int v1(0);
-	viewer->createViewPort(0.0, 0.0, 0.5, 1.0, v1);
-	viewer->setBackgroundColor(255, 255, 255, v1);
-	//int v2(0);
-	viewer->createViewPort(0.5, 0.0, 1.0, 1.0, v2);
-	viewer->setBackgroundColor(255, 255, 255, v2);
-	viewer->addText("source pointclod dataset(red)", 10, 10, 0, 0, 0, "v1", v1);
-	viewer->removePointCloud("v1_source");
-	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> src_color(src, 255, 0, 0);
-	viewer->addPointCloud(src, src_color, "v1_source", v1);
-	PCL_INFO("Press q to begin the registration.\n");
-	viewer->spin();
-	*/
-
-	//restructMethod_3(source);
-	//smoothingHandle(source);
-	//poiRestruct(source);
-	//restructMethod_2(src);
-	
-	
-
 	return 0;
 }
